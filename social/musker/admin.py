@@ -25,4 +25,4 @@ admin.site.unregister(User)
 
 # Reregister user and Profile
 admin.site.register(User, UserAdmin)
-#admin.site.register(Profile)
+# admin.site.register(Profile)
