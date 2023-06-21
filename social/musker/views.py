@@ -1,13 +1,14 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from musker.models import Profile
+from musker.models import Profile,Meep
 
 from .models import Profile
 
 
 def home(request):
     if request.user.is_authenticated:
-    return render(request, "home.html", {})
+        meeps= Meep.objects.all().order_by("-created_at")
+    return render(request, "home.html", {"meeps":meeps})
 
 
 def profile_list(request):
