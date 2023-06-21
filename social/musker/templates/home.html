@@ -3,6 +3,9 @@
 {% block content %}
 <h1>Meeps!</h1>
 {% for meep in meeps %}
-{{meep}}</br></br>
+<div class="alert alert-dark" role="alert">
+    {{meep}}
+  </div>
+</br></br>
 {% endfor %}
 {% endblock %}
