@@ -5,7 +5,19 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 User = get_user_model()
-
+# Creating meep mmodel
+class Meep(models.Model):
+    user = models.ForeignKey(
+        User, related_name="meeps",on_delete=models.DO_NOTHING
+    )
+    body = models.CharField(max_length=200)
+    created_at= models.DateField(auto_now_add=True)
+    def __str__(self):
+        return(
+            f"{self.user}"
+            f"({self.created_at:%Y %m %d %H})"
+            f"{self.body}...."
+        )
 
 # Create A User Profile Model
 class Profile(models.Model):
@@ -13,7 +25,7 @@ class Profile(models.Model):
     follows = models.ManyToManyField(
         "self", related_name="followed_by", symmetrical=False, blank=True
     )
-    #date_modified = models.DateTimeField(User, auto_now=True)
+    # date_modified = models.DateTimeField(User, auto_now=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
 
-from .models import Profile
+from .models import Profile,Meep
 
 # Unregister groups
 admin.site.unregister(Group)
@@ -26,3 +26,6 @@ admin.site.unregister(User)
 # Reregister user and Profile
 admin.site.register(User, UserAdmin)
 # admin.site.register(Profile)
+
+# Register Meeps
+admin.site.register(Meep)

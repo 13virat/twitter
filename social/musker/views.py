@@ -6,6 +6,7 @@ from .models import Profile
 
 
 def home(request):
+    if request.user.is_authenticated:
     return render(request, "home.html", {})
 
 
@@ -21,18 +22,18 @@ def profile_list(request):
 def profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
-#Post form logic
-        if request.method=="POST":
-            #Get current User id
-            current_user_profile= request.user.profile
-            #get from data
-            action = request.POST['follow']
-            #Decide to follow or unfollow
+        # Post form logic
+        if request.method == "POST":
+            # Get current User id
+            current_user_profile = request.user.profile
+            # get from data
+            action = request.POST["follow"]
+            # Decide to follow or unfollow
             if action == "unfollow":
                 current_user_profile.follows.remove(profile)
             elif action == "follow":
                 current_user_profile.follows.add(profile)
-            #save profile
+            # save profile
             current_user_profile.save()
 
         return render(request, "profile.html", {"profile": profile})
