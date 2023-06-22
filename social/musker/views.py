@@ -1,10 +1,12 @@
+from django import forms
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from musker.models import Meep, Profile
 
-from .forms import MeepForm
+from .forms import MeepForm, SignUpForms
 from .models import Profile
-from django.contrib.auth import authenticate, login ,logout
 
 
 def home(request):
@@ -55,23 +57,45 @@ def profile(request, pk):
     else:
         messages.success(request, ("You must be logged in to view this page"))
         return redirect("home")
+
+
 def login_user(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request,username=username, password= password)
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, ("You have been logged in"))
-            return redirect('home')
+            return redirect("home")
         else:
             messages.success(request, ("there is an error plz try again"))
-            return redirect('login')
-        
-    else:    
+            return redirect("login")
+
+    else:
         return render(request, "login.html", {})
+
+
 def logout_user(request):
     logout(request)
-    messages.success(request,("you have been logged out"))
-    return redirect('home')
+    messages.success(request, ("you have been logged out"))
+    return redirect("home")
 
+
+def register_user(request):
+    form=SignUpForms()
+    if request.method == "POST":
+        form = SignUpForms(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            # log in user
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("you have been successfully registered"))
+            return redirect("home")
+    return render(request, "register.html", {'form':form})
