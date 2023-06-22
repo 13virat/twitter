@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+
+
 <h1>Meeps!</h1>
 {% for meep in meeps %}
 <div class="alert alert-dark" role="alert">
@@ -8,4 +13,5 @@
   </div>
 </br></br>
 {% endfor %}
+</div>
 {% endblock %}

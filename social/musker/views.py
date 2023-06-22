@@ -1,14 +1,14 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from musker.models import Profile,Meep
+from musker.models import Meep, Profile
 
 from .models import Profile
 
 
 def home(request):
     if request.user.is_authenticated:
-        meeps= Meep.objects.all().order_by("-created_at")
-    return render(request, "home.html", {"meeps":meeps})
+        meeps = Meep.objects.all().order_by("-created_at")
+    return render(request, "home.html", {"meeps": meeps})
 
 
 def profile_list(request):
@@ -23,7 +23,7 @@ def profile_list(request):
 def profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
-        meeps=Meep.objects.filter(user_id=pk).order_by("-created_at")
+        meeps = Meep.objects.filter(user_id=pk).order_by("-created_at")
         # Post form logic
         if request.method == "POST":
             # Get current User id
@@ -38,7 +38,7 @@ def profile(request, pk):
             # save profile
             current_user_profile.save()
 
-        return render(request, "profile.html", {"profile": profile,"meeps":meeps})
+        return render(request, "profile.html", {"profile": profile, "meeps": meeps})
     else:
         messages.success(request, ("You must be logged in to view this page"))
         return redirect("home")
