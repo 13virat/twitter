@@ -2,13 +2,25 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from musker.models import Meep, Profile
 
+from .forms import MeepForm
 from .models import Profile
 
 
 def home(request):
     if request.user.is_authenticated:
+        form = MeepForm(request.POST or None)
+        if request.method == "POST":
+            if form.is_valid():
+                meep = form.save(commit=False)
+                meep.user = request.user
+                meep.save()
+                messages.success(request, ("You meep has been posted"))
+                return redirect("home")
         meeps = Meep.objects.all().order_by("-created_at")
-    return render(request, "home.html", {"meeps": meeps})
+        return render(request, "home.html", {"meeps": meeps, "form": form})
+    else:
+        meeps = Meep.objects.all().order_by("-created_at")
+        return render(request, "home.html", {"meeps": meeps})
 
 
 def profile_list(request):
