@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from musker.models import Meep, Profile
 
@@ -83,7 +84,7 @@ def logout_user(request):
 
 
 def register_user(request):
-    form=SignUpForms()
+    form = SignUpForms()
     if request.method == "POST":
         form = SignUpForms(request.POST)
         if form.is_valid():
@@ -98,4 +99,20 @@ def register_user(request):
             login(request, user)
             messages.success(request, ("you have been successfully registered"))
             return redirect("home")
-    return render(request, "register.html", {'form':form})
+    return render(request, "register.html", {"form": form})
+
+
+def update_user(request):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        form = SignUpForms(request.POST or None, instance=current_user)
+        if form.is_valid():
+            form.save()
+            login(request, current_user)
+            messages.success(request, ("your info has been updated"))
+            return redirect("home")
+
+        return render(request, "update_user.html", {})
+    else:
+        messages.success(request, ("you must be logged in to view that page..."))
+        return redirect("home")
