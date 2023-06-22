@@ -4,6 +4,7 @@ from musker.models import Meep, Profile
 
 from .forms import MeepForm
 from .models import Profile
+from django.contrib.auth import authenticate, login ,logout
 
 
 def home(request):
@@ -54,3 +55,7 @@ def profile(request, pk):
     else:
         messages.success(request, ("You must be logged in to view this page"))
         return redirect("home")
+def login_user(request):
+    return render(request, "login.html", {})
+def logout_user(request):
+    pass   
