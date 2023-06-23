@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from musker.models import Meep, Profile
 
-from .forms import MeepForm, SignUpForms
+from .forms import MeepForm, ProfilePicForm, SignUpForms
 from .models import Profile
 
 
@@ -105,14 +105,21 @@ def register_user(request):
 def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
-        form = SignUpForms(request.POST or None, instance=current_user)
-        if form.is_valid():
-            form.save()
+        profile_user = Profile.objects.get(user__id=request.user.id)
+        user_form = SignUpForms(
+            request.POST or None, request.FILES or None, instance=current_user
+        )
+        profile_form = ProfilePicForm(
+            request.POST or None, request.FILES or None, instance=profile_user
+        )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             login(request, current_user)
             messages.success(request, ("your info has been updated"))
             return redirect("home")
 
-        return render(request, "update_user.html", {"form": form})
+        return render(request, "update_user.html", {"user_form": user_form,"profile_form": profile_form})
     else:
         messages.success(request, ("you must be logged in to view that page..."))
         return redirect("home")
