@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="container text-center">
     <div class="row">
@@ -9,15 +9,32 @@
             <h1>Meeps!</h1>
             {% for meep in meeps %}
             <div class="alert alert-dark" role="alert">
-                {{meep.body}}</br>
-                <small class="text-muted">
-                    ({{ meep.created_at }}) by
-                    @{{ meep.user.username }}
-                </small>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1">
+                            {% if meep.user.profile.profile_image %}
+                            <img src="{{meep.user.profile.profile_image.url}}" width="50" height="50" class="rounded-circle"
+                                alt="{{profile.user.username}}">
+                            {% else %}
+                            <img src="{% static 'images/virattt.jpg' %}" width="50" height="50" class="rounded-circle"
+                                alt="{{profile.user.username}}">
+                            {% endif %}
+                        </div>
+                        <div class="col-11">
+                            {{meep.body}}</br>
+                            <small class="text-muted">
+                                ({{ meep.created_at }}) by
+                                @{{ meep.user.username }}
+                            </small>
+                        </div>
+                        </br></br>
+
+                    </div>
+                </div>
             </div>
-            </br></br>
             {% endfor %}
         </div>
+
         <div class="col-4">
             </br></br>
             {%if form%}
@@ -28,4 +45,6 @@
             </form>
             {% endif %}
         </div>
-        {% endblock %}
+    </div>
+</div>
+{% endblock %}
