@@ -21,7 +21,11 @@
             {% endif %}
         </div>
         <div class="col-4">
-            here
+            {% if profile.profile_image %}
+           <img src="{{ profile.profile_image.url }}" style="height: 12rem;width:12rem" >
+        </br></br>
+
+            {% endif %}
             <div class="card">
                 <h5 class="card-header">Follows</h5>
                 <div class="card-body">
@@ -35,7 +39,7 @@
 
 
 
-            </br>
+        </br>
             <div class="card">
                 <h5 class="card-header">Followed by</h5>
                 <div class="card-body">
