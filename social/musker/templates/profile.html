@@ -10,20 +10,29 @@
             {% if meeps %}
             {% for meep in meeps %}
             <div class="alert alert-dark" role="alert">
-                {{meep.body}}</br>
-                <small class="text-muted">
-                    ({{ meep.created_at }}) by
-                    @{{ meep.user.username }}
-                </small>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+
+                            {{meep.body}}</br>
+                            <small class="text-muted">
+                                ({{ meep.created_at }}) by
+                                @{{ meep.user.username }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                </br></br>
             </div>
-            </br></br>
             {% endfor %}
             {% endif %}
         </div>
         <div class="col-4">
             {% if profile.profile_image %}
-           <img src="{{ profile.profile_image.url }}" style="height: 12rem;width:12rem" class="rounded-circle">
-        </br></br>
+            <img src="{{ profile.profile_image.url }}" style="height: 12rem;width:12rem" class="rounded-circle">
+            </br></br>
 
             {% endif %}
             <div class="card">
@@ -39,7 +48,7 @@
 
 
 
-        </br>
+            </br>
             <div class="card">
                 <h5 class="card-header">Followed by</h5>
                 <div class="card-body">
