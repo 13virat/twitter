@@ -119,7 +119,11 @@ def update_user(request):
             messages.success(request, ("your info has been updated"))
             return redirect("home")
 
-        return render(request, "update_user.html", {"user_form": user_form,"profile_form": profile_form})
+        return render(
+            request,
+            "update_user.html",
+            {"user_form": user_form, "profile_form": profile_form},
+        )
     else:
         messages.success(request, ("you must be logged in to view that page..."))
         return redirect("home")
