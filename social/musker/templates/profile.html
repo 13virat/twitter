@@ -89,6 +89,9 @@
                         {% endfor %}
                     </p>
                 </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'follows' profile.user.id %}" class="btn btn-small btn-outline-secondary">See All...</a>
+                </div>
             </div>
 
 
@@ -104,18 +107,18 @@
                                 style="color: gray"></i></a>
                         {% else %}
                         <a href="{% url 'follow' following.user.id %}"><i class="fa fa-user-plus small "
-                            style="color: gray"></i></a>
+                                style="color: gray"></i></a>
                         {% endif %}
                         </br>
 
                         {% endfor %}
-                        
+
                     </p>
-                    
+
                 </div>
-                <div class="card-footer">
-                    <a href="{% url 'followers' profile.user.id %}">See All...</a>
-                  </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-small btn-outline-secondary">See All...</a>
+                </div>
             </div>
             </br>
             <form method=POST>
