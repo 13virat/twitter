@@ -136,7 +136,7 @@ def meep_like(request, pk):
             meep.likes.remove(request.user)
         else:
             meep.likes.add(request.user)
-        print(request.META.get("HTTP_REFERER"))
+        
         return redirect(request.META.get("HTTP_REFERER"))
 
     else:
