@@ -31,6 +31,12 @@ class Profile(models.Model):
     # date_modified = models.DateTimeField(User, auto_now=True)
     date_modified = models.DateTimeField(auto_now=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    
+    profile_bio = models.CharField(null=True, blank=True, max_length=500)
+    homepage_link = models.CharField(null=True, blank=True, max_length=200)
+    facebook_link = models.CharField(null=True, blank=True, max_length=200)
+    instagram_link = models.CharField(null=True, blank=True, max_length=200)
+    linkedin_link = models.CharField(null=True, blank=True, max_length=200)
 
     def __str__(self):
         return self.user.username

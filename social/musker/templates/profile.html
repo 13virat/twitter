@@ -30,9 +30,11 @@
                                 ({{ meep.created_at }}) by
                                 @{{ meep.user.username }} &nbsp;&nbsp;{{ meep.number_of_likes}}
                                 {% if user in meep.likes.all %}
-                                <a href="{% url 'meep_like' meep.id %}"><i class="fa-solid fa-heart" style="color:red"></i></a>
+                                <a href="{% url 'meep_like' meep.id %}"><i class="fa-solid fa-heart"
+                                        style="color:red"></i></a>
                                 {% else %}
-                                <a href="{% url 'meep_like' meep.id %}"><i class="fa fa-heart-o" style="color:red"></i></a>
+                                <a href="{% url 'meep_like' meep.id %}"><i class="fa fa-heart-o"
+                                        style="color:red"></i></a>
                                 {% endif %}
                                 &nbsp; &nbsp;
                                 <a href="{% url 'meep_show' meep.id %}"><i class="fa-solid fa-share"
@@ -50,8 +52,26 @@
             {% if profile.profile_image %}
             <img src="{{ profile.profile_image.url }}" style="height: 12rem;width:12rem" class="rounded-circle">
             </br></br>
+            {% if profile.homepage_link %}
+            <a href="{{profile.homepage_link}}" target="new">
+                <i class="fa-solid fa-link" style="color: gray"></i></a>
+            {% endif %} &nbsp;&nbsp; 
+            {% if profile.facebook_link %}
+            <a href="{{profile.facebook_link}}" target="new">
+                <i class="fa-brands fa-facebook" style="color: gray"></i></a>
+            {% endif %}&nbsp;&nbsp;
+            {% if profile.instagram_link %}
+            <a href="{{profile.instagram_link}}" target="new">
+                <i class="fa-brands fa-instagram" style="color: gray"></i></a>
+            {% endif %}&nbsp;&nbsp;
+            {% if profile.linkedin_link %}
+            <a href="{{profile.linkedin_link}}" target="new">
+                <i class="fa-brands fa-linkedin-in" style="color: gray"></i></a>
+            {% endif %}&nbsp;&nbsp;
+
 
             {% endif %}
+        </br></br>
             <div class="card">
                 <h5 class="card-header">Follows</h5>
                 <div class="card-body">
