@@ -136,9 +136,23 @@ def meep_like(request, pk):
             meep.likes.remove(request.user)
         else:
             meep.likes.add(request.user)
-        print(request.META.get("HTTP_REFERER"))    
+        print(request.META.get("HTTP_REFERER"))
         return redirect(request.META.get("HTTP_REFERER"))
 
     else:
         messages.success(request, ("you must be logged in to view that page..."))
+        return redirect("home")
+
+
+def meep_show(request, pk):
+    meep = get_object_or_404(Meep, id=pk)
+    if meep:
+        return render(
+            request,
+            "show_meep.html",
+            {"meep": meep},
+        )
+
+    else:
+        messages.success(request, ("That meep does not exist..."))
         return redirect("home")
