@@ -10,17 +10,19 @@
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
         <div class="col-md-4">
-        {% if profile.profile_image %}
-        <img src="{{profile.profile_image.url}}" width=200 height=200 class="img-fluid rounded-start" alt="{{profile.user.username}}">
-        {% else %}
-        <img src="{% static 'images/virattt.jpg' %}" class="img-fluid rounded-start" alt="Profile Image">
-        {% endif %}
-            
+            {% if profile.profile_image %}
+            <img src="{{profile.profile_image.url}}" width=200 height=200 class="img-fluid rounded-start"
+                alt="{{profile.user.username}}">
+            {% else %}
+            <img src="{% static 'images/virattt.jpg' %}" class="img-fluid rounded-start" alt="Profile Image">
+            {% endif %}
+
         </div>
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">{{ profile.user.username }}</h5></br>
-                <p class="card-text"><a href="{% url 'profile' profile.user.id %}">@{{ profile.user.username|lower }}</a></p></br>
+                <p class="card-text"><a href="{% url 'profile' profile.user.id %}">@{{ profile.user.username|lower
+                        }}</a></p></br>
                 <p class="card-text"><small class="text-body-secondary">Last Updated:{{ profile.date_modified}}</small>
                 </p>
             </div>
