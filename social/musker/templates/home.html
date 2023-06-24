@@ -13,8 +13,8 @@
                     <div class="row">
                         <div class="col-1">
                             {% if meep.user.profile.profile_image %}
-                            <img src="{{meep.user.profile.profile_image.url}}" width="50" height="50" class="rounded-circle"
-                                alt="{{profile.user.username}}">
+                            <img src="{{meep.user.profile.profile_image.url}}" width="50" height="50"
+                                class="rounded-circle" alt="{{profile.user.username}}">
                             {% else %}
                             <img src="{% static 'images/virattt.jpg' %}" width="50" height="50" class="rounded-circle"
                                 alt="{{profile.user.username}}">
@@ -25,6 +25,15 @@
                             <small class="text-muted">
                                 ({{ meep.created_at }}) by
                                 @{{ meep.user.username }}
+                                - {{ meep.number_of_likes}} Likes
+                                {% if user in meep.likes.all %}
+                                <a href="{% url 'meep_like' meep.id %}">Unlike</a>
+                                {% else %}
+                                <a href="{% url 'meep_like' meep.id %}">Like</a>
+                                {% endif %}
+
+
+
                             </small>
                         </div>
                         </br></br>
