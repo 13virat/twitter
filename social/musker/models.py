@@ -12,14 +12,11 @@ class Meep(models.Model):
     user = models.ForeignKey(User, related_name="meeps", on_delete=models.DO_NOTHING)
     body = models.CharField(max_length=200)
     created_at = models.DateField(auto_now_add=True)
-    likes=models.ManyToManyField(User,related_name="meep_like",blank=True)
+    likes = models.ManyToManyField(User, related_name="meep_like", blank=True)
 
-
-#keep track or count of like
+    # keep track or count of like
     def number_of_likes(self):
         return self.likes.count()
-
-
 
     def __str__(self):
         return f"{self.user}" f"({self.created_at:%Y %m %d %H})" f"{self.body}...."
@@ -33,7 +30,8 @@ class Profile(models.Model):
     )
     # date_modified = models.DateTimeField(User, auto_now=True)
     date_modified = models.DateTimeField(auto_now=True)
-    profile_image = models.ImageField(null=True, blank=True,upload_to="images/")
+    profile_image = models.ImageField(null=True, blank=True, upload_to="images/")
+
     def __str__(self):
         return self.user.username
 

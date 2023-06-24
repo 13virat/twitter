@@ -16,10 +16,10 @@
                             {% if profile.profile_image %}
                             <img src="{{profile.profile_image.url}}" width="50" height="50" class="rounded-circle"
                                 alt="{{profile.user.username}}">
-                                {% else %}
-                                <img src="{% static 'images/virattt.jpg' %}" width="50" height="50" class="rounded-circle"
+                            {% else %}
+                            <img src="{% static 'images/virattt.jpg' %}" width="50" height="50" class="rounded-circle"
                                 alt="{{profile.user.username}}">
-                                {% endif %}
+                            {% endif %}
 
 
                         </div>
@@ -28,7 +28,12 @@
                             {{meep.body}}</br>
                             <small class="text-muted">
                                 ({{ meep.created_at }}) by
-                                @{{ meep.user.username }}
+                                @{{ meep.user.username }} - {{ meep.number_of_likes}} Likes -
+                                {% if user in meep.likes.all %}
+                                <a href="{% url 'meep_like' meep.id %}">Unlike</a>
+                                {% else %}
+                                <a href="{% url 'meep_like' meep.id %}">Like</a>
+                                {% endif %}
                             </small>
                         </div> </br></br>
                     </div>

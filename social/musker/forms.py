@@ -2,14 +2,18 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Meep,Profile
+from .models import Meep, Profile
 
-#profile etra form
+
+# profile etra form
 class ProfilePicForm(forms.ModelForm):
     profile_image = forms.ImageField(label="Profile Picture")
+
     class Meta:
         model = Profile
-        fields= ('profile_image',)
+        fields = ("profile_image",)
+
+
 class MeepForm(forms.ModelForm):
     body = forms.CharField(
         required=True,
@@ -24,7 +28,10 @@ class MeepForm(forms.ModelForm):
 
     class Meta:
         model = Meep
-        exclude = ("user","likes",)
+        exclude = (
+            "user",
+            "likes",
+        )
 
 
 class SignUpForms(UserCreationForm):

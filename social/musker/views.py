@@ -135,12 +135,8 @@ def meep_like(request, pk):
         if meep.likes.filter(id=request.user.id):
             meep.likes.remove(request.user)
         else:
-            meep.likes.add(request.user)   
-        return redirect('home')         
-
-
-
-
+            meep.likes.add(request.user)
+        return redirect("home")
 
     else:
         messages.success(request, ("you must be logged in to view that page..."))
