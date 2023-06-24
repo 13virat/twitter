@@ -55,7 +55,7 @@
             {% if profile.homepage_link %}
             <a href="{{profile.homepage_link}}" target="new">
                 <i class="fa-solid fa-link" style="color: gray"></i></a>
-            {% endif %} &nbsp;&nbsp; 
+            {% endif %} &nbsp;&nbsp;
             {% if profile.facebook_link %}
             <a href="{{profile.facebook_link}}" target="new">
                 <i class="fa-brands fa-facebook" style="color: gray"></i></a>
@@ -71,7 +71,13 @@
 
 
             {% endif %}
-        </br></br>
+            </br></br>
+            {% if profile %}
+            <p align ="justify">{{profile.profile_bio}}</p>
+            {% endif %}
+
+
+            </br></br>
             <div class="card">
                 <h5 class="card-header">Follows</h5>
                 <div class="card-body">
