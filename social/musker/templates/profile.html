@@ -35,11 +35,14 @@
                                 {% else %}
                                 <a href="{% url 'meep_like' meep.id %}"><i class="fa fa-heart-o"
                                         style="color:red"></i></a>
-                                {% endif %}
-                                &nbsp; &nbsp;
+                                {% endif %}&nbsp; 
                                 <a href="{% url 'meep_show' meep.id %}"><i class="fa-solid fa-share"
-                                        style="color:gray"></i>
-                                </a>
+                                        style="color:gray"></i></a>
+                                        {% if request.user.username == profile.user.username %}
+                                        &nbsp;&nbsp;&nbsp;
+                                <a href="{% url 'delete_meep' meep.id %}"><i class="fas fa-trash"
+                                        style="color:gray"></i></a>
+                                        {% endif %}
                             </small>
                         </div> </br></br>
                     </div>
@@ -90,7 +93,8 @@
                     </p>
                 </div>
                 <div class="card-footer text-end">
-                    <a href="{% url 'follows' profile.user.id %}" class="btn btn-small btn-outline-secondary">See All...</a>
+                    <a href="{% url 'follows' profile.user.id %}" class="btn btn-small btn-outline-secondary">See
+                        All...</a>
                 </div>
             </div>
 
@@ -117,7 +121,8 @@
 
                 </div>
                 <div class="card-footer text-end">
-                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-small btn-outline-secondary">See All...</a>
+                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-small btn-outline-secondary">See
+                        All...</a>
                 </div>
             </div>
             </br>
